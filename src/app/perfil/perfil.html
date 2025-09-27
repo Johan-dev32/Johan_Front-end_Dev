@@ -1,0 +1,16 @@
+<div class="perfil card shadow-sm p-4 mx-auto mt-4">
+  <div class="text-center">
+    <img src="assets/img/user.png" alt="Usuario" class="perfil-img mb-3">
+    <h4>{{ usuario.nombre }}</h4>
+    <p class="text-muted">{{ usuario.correo }}</p>
+  </div>
+
+  <hr>
+
+  <h6>Información personal</h6>
+  <ul class="list-unstyled">
+    <li><b>Nombre:</b> {{ usuario.nombre }}</li>
+    <li><b>Correo:</b> {{ usuario.correo }}</li>
+    <li><b>Rol:</b> {{ usuario.rol }}</li>
+  </ul>
+</div>

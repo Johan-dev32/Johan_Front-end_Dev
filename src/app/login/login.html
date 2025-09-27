@@ -1,0 +1,17 @@
+
+  <div class="login-wrapper">
+    <div class="login-box">
+      <h2>Iniciar Sesión</h2>
+    
+        <div class="mb-3">
+          <label for="usuario" class="form-label">Correo electrónico</label>
+          <input type="email" [(ngModel)]="usuario" class="form-control" id="usuario" placeholder="Escribe tú Correo" required>
+        </div>
+        <div class="mb-3">
+          <label for="clave" class="form-label">Contraseña</label>
+          <input type="password" [(ngModel)]="clave" id="clave" placeholder="Escribe tú Contraseña"class="form-control"  required>
+        </div>
+        <button (click)="Ingresar()" class="btn-gradient">Entrar</button>
+
+    </div>
+  </div>

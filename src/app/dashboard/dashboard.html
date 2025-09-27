@@ -1,0 +1,72 @@
+<div class="dashboard-layout">
+  <!-- Sidebar izquierdo con usuario -->
+  <aside class="sidebar-user card shadow-sm p-3">
+    <div class="text-center">
+      <img [src]="usuarioActual.avatar" alt="Usuario" class="user-img mb-2 rounded-circle">
+      <h6>{{ usuarioActual.nombre }}</h6>
+      <small class="text-muted">{{ usuarioActual.email }}</small>
+    </div>
+    <hr>
+    <ul class="nav flex-column">
+      <li class="nav-item" (click)="cambiarSeccion('deportes')"
+          [class.active]="seccionActiva === 'deportes'">⚽ Deportes</li>
+      <li class="nav-item" (click)="cambiarSeccion('tecnologia')"
+          [class.active]="seccionActiva === 'tecnologia'">💻 Tecnología</li>
+      <li class="nav-item" (click)="cambiarSeccion('musica')"
+          [class.active]="seccionActiva === 'musica'">🎵 Música</li>
+    </ul>
+  </aside>
+
+  <!-- Feed central -->
+  <main class="feed">
+    <!-- Caja de crear publicación -->
+    <div class="nuevo-post card shadow-sm p-3 mb-4">
+      <h5>Crear publicación</h5>
+      <textarea [(ngModel)]="nuevaPublicacion"
+                placeholder="¿Qué estás pensando?"
+                rows="3"
+                class="form-control mb-2"></textarea>
+
+      <input type="file" accept="image/*" (change)="onFileSelected($event)" class="form-control mb-3">
+
+      <button class="btn btn-primary w-100" (click)="agregarPublicacion()">📢 Publicar</button>
+    </div>
+
+    <!-- Publicaciones -->
+    <div *ngFor="let pub of publicacionesFiltradas()" class="post card shadow-sm p-3 mb-4">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="d-flex align-items-center">
+          <img [src]="pub.usuario.avatar" alt="avatar" class="rounded-circle me-2" width="40" height="40">
+          <div>
+            <h6 class="mb-0">{{ pub.usuario.nombre }}</h6>
+            <small class="text-muted">{{ pub.fecha | date:'short' }}</small>
+          </div>
+        </div>
+      </div>
+
+      <p>{{ pub.contenido }}</p>
+      <img *ngIf="pub.imagen"
+           [src]="pub.imagen"
+           class="post-img rounded mb-2 w-100"
+           (click)="abrirDetalles(pub)">
+
+      <div class="acciones mb-2">
+        <button class="btn btn-sm btn-outline-primary me-2" (click)="darLike(pub)">
+          👍 Me gusta ({{ pub.likes }})
+        </button>
+        <span class="text-muted small">{{ pub.comentarios.length }} comentarios</span>
+      </div>
+
+      <!-- Comentarios -->
+      <div class="comentarios">
+        <div *ngFor="let c of pub.comentarios" class="comentario p-2 rounded mb-1 bg-light">
+          {{ c }}
+        </div>
+        <div class="input-group mt-2">
+          <input [(ngModel)]="nuevoComentario[pub.id]" type="text" class="form-control" placeholder="Escribe un comentario...">
+          <button class="btn btn-secondary" (click)="agregarComentario(pub)">Comentar</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

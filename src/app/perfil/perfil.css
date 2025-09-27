@@ -1,0 +1,10 @@
+.perfil {
+  max-width: 500px;
+  border-radius: 12px;
+  background: #fff;
+}
+.perfil-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
